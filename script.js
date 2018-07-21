@@ -73,6 +73,7 @@ $(document).ready(function() {
         'font-size': 30,
         'color': 'white',
         'background-color': 'rgb(161, 0, 0,0.5)',
+        '-khtml-opacity': 0.5,
         'font-family': 'Orbitron ,sans-serif',
         'display': 'none'
     });
