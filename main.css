@@ -1,0 +1,30 @@
+#gameScreen {
+    margin: auto;
+    position: relative;
+    background-color: silver;
+    overflow: hidden;
+    border: 3px solid red;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+     border-top-color:lightblue;
+    
+}
+
+.gameObject {
+    position: absolute;
+    z-index: 1;
+}
+
+body h1 {
+    text-align: center;
+    font-family: 'Orbitron', sans-serif;
+    color: #b30000;
+    background-image: url("space.gif");
+    width: 800;
+    margin: auto;
+    border: 3px solid red;
+    padding-top: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-color: blue;
+}
