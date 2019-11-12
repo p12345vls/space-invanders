@@ -1,19 +1,19 @@
-var gameScreen;
-var output;
-var bullets;
+let gameScreen;
+let output;
+let bullets;
 
-var ship;
+let ship;
 
-var enemies = new Array();
+const enemies = new Array();
 
-var gameTimer;
+let gameTimer;
 
-var leftArrowDown = false;
-var rightArrowDown = false;
+let leftArrowDown = false;
+let rightArrowDown = false;
 
-var button;
-var displayScore;
-var score = 0;
+let button;
+let displayScore;
+let score = 0;
 
 const BG_SPEED = 4;
 const GS_WIDTH = 800;
@@ -116,8 +116,8 @@ $(document).ready(function() {
 
     gameScreen.appendChild(ship);
 
-    for (var i = 0; i < 10; i++) {
-        var enemy = new Image();
+    for (let i = 0; i < 10; i++) {
+        let enemy = new Image();
         enemy.className = 'gameObject';
         enemy.style.width = '64px';
         enemy.style.height = '64px';
@@ -133,11 +133,11 @@ $(document).ready(function() {
 function placeEnemyShip(e) {
     e.speed = Math.floor(Math.random() * 10) + 6;
 
-    var maxX = GS_WIDTH - parseInt(e.style.width);
-    var newX = Math.floor(Math.random() * maxX);
+    let maxX = GS_WIDTH - parseInt(e.style.width);
+    let newX = Math.floor(Math.random() * maxX);
     e.style.left = newX + 'px';
 
-    var newY = Math.floor(Math.random() * 600) - 1000;
+    let newY = Math.floor(Math.random() * 600) - 1000;
     e.style.top = newY + 'px';
 }
 
@@ -147,25 +147,25 @@ function placeEnemyShip(e) {
 function gameloop() {
 
     if (leftArrowDown) {
-        var newX = parseInt(ship.style.left);
+        let newX = parseInt(ship.style.left);
         if (newX > 0) ship.style.left = newX - 20 + 'px';
         else ship.style.left = '0px';
     }
 
     if (rightArrowDown) {
-        var newX = parseInt(ship.style.left);
-        var maxX = GS_WIDTH - parseInt(ship.style.width);
+        let newX = parseInt(ship.style.left);
+        let maxX = GS_WIDTH - parseInt(ship.style.width);
         if (newX < maxX) ship.style.left = newX + 20 + 'px';
         else ship.style.left = maxX + 'px';
     }
 
-    var b = bullets.children();
-    for (var i = 0; i < b.length; i++) {
-        var newY = parseInt(b[i].style.top) - b[i].speed;
+    let b = bullets.children();
+    for (let i = 0; i < b.length; i++) {
+        let newY = parseInt(b[i].style.top) - b[i].speed;
         if (newY < 0) bullets.find(b[i]).remove();
         else {
             b[i].style.top = newY + 'px';
-            for (var j = 0; j < enemies.length; j++) {
+            for (let j = 0; j < enemies.length; j++) {
                 if (hittest(b[i], enemies[j])) {
                     this.score += 100;
                     displayScore.text("Score:   " + this.score);
@@ -179,8 +179,8 @@ function gameloop() {
         }
     }
     // output.innerHTML = b.length;
-    for (var i = 0; i < enemies.length; i++) {
-        var newY = parseInt(enemies[i].style.top);
+    for (let i = 0; i < enemies.length; i++) {
+        let newY = parseInt(enemies[i].style.top);
         if (newY > GS_HEIGHT) placeEnemyShip(enemies[i]);
         else enemies[i].style.top = newY + enemies[i].speed + 'px';
 
@@ -196,7 +196,7 @@ function gameloop() {
 }
 
 function explode(obj) {
-    var explosion = $('<img />');
+    let explosion = $('<img />');
     explosion.attr('class', 'gameObject');
     explosion.attr('src', 'explosion.gif?x=' + Date.now());
     explosion.css({
@@ -212,43 +212,43 @@ function explode(obj) {
 
 function fire() {
     new Audio("sounds/fire.wav").play();
-    var bulletWidth = 4;
-    var bulletHeight = 10;
-    var bullet = document.createElement('DIV');
+    let bulletWidth = 4;
+    let bulletHeight = 10;
+    let bullet = document.createElement('DIV');
     bullet.className = 'gameObject';
     bullet.style.backgroundColor = 'yellow';
     bullet.style.width = bulletWidth;
     bullet.style.height = bulletHeight;
     bullet.speed = 20;
     bullet.style.top = parseInt(ship.style.top) - bulletHeight + 'px';
-    var shipX = parseInt(ship.style.left) + parseInt(ship.style.width) / 2;
+    let shipX = parseInt(ship.style.left) + parseInt(ship.style.width) / 2;
     bullet.style.left = (shipX - bulletWidth / 2) + 'px';
     bullets.append(bullet);
 }
 
 
 function hittest(a, b) {
-    var aW = parseInt(a.style.width);
-    var aH = parseInt(a.style.height);
+    let aW = parseInt(a.style.width);
+    let aH = parseInt(a.style.height);
 
-    var aX = parseInt(a.style.left) + aW / 2;
-    var aY = parseInt(a.style.top) + aH / 2;
+    let aX = parseInt(a.style.left) + aW / 2;
+    let aY = parseInt(a.style.top) + aH / 2;
 
-    var aR = (aW + aH) / 4;
+    let aR = (aW + aH) / 4;
 
-    var bW = parseInt(b.style.width);
-    var bH = parseInt(b.style.height);
+    let bW = parseInt(b.style.width);
+    let bH = parseInt(b.style.height);
 
-    var bX = parseInt(b.style.left) + bW / 2;
-    var bY = parseInt(b.style.top) + bH / 2;
+    let bX = parseInt(b.style.left) + bW / 2;
+    let bY = parseInt(b.style.top) + bH / 2;
 
-    var bR = (bW + bH) / 4;
+    let bR = (bW + bH) / 4;
 
-    var minDistance = aR + bR;
+    let minDistance = aR + bR;
 
-    var cXs = (aX - bX) * (aX - bX);
-    var cYs = (aY - bY) * (aY - bY);
-    var distance = Math.sqrt(cXs + cYs);
+    let cXs = (aX - bX) * (aX - bX);
+    let cYs = (aY - bY) * (aY - bY);
+    let distance = Math.sqrt(cXs + cYs);
 
     if (distance < minDistance) {
 
